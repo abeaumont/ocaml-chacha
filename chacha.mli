@@ -5,40 +5,12 @@
 type t
 (** Type of ChaCha state. *)
 
-module ChaCha20 : sig
-  val create : Cstruct.t -> Cstruct.t -> t
-  (** [create key nonce] is [state],
-      the ChaCha20 encryption/decryption function state.
-      It's a shortcout for ChaCha20.create
-      [key] is either a 32 (recommended) or 16 bytes.
-      [nonce] is 8 bytes.
-      @raise Invalid_argument if [key] or [nonce] is not of the correct size *)
-end
-
-module ChaCha12 : sig
-  val create : Cstruct.t -> Cstruct.t -> t
-  (** [create key nonce] is [state],
-      the ChaCha12 encryption/decryption function state.
-      It's a shortcout for ChaCha20.create
-      [key] is either a 32 (recommended) or 16 bytes.
-      [nonce] is 8 bytes.
-      @raise Invalid_argument if [key] or [nonce] is not of the correct size *)
-end
-
-module ChaCha8 : sig
-  val create : Cstruct.t -> Cstruct.t -> t
-  (** [create key nonce] is [state],
-      the ChaCha8 encryption/decryption function state.
-      It's a shortcout for ChaCha20.create
-      [key] is either a 32 (recommended) or 16 bytes.
-      [nonce] is 8 bytes.
-      @raise Invalid_argument if [key] or [nonce] is not of the correct size *)
-end
-
-val create : Cstruct.t -> Cstruct.t -> t
+val create: ?hash:(Cstruct.t -> Cstruct.t) -> Cstruct.t -> Cstruct.t -> t
 (** [create key nonce] is [state],
     the ChaCha20 encryption/decryption function state.
-    It's a shortcout for ChaCha20.create
+    [hash] is Chacha_core.chacha20_core by default (recommended),
+    Chacha_core.chacha12 or Chacha_core.chacha8
+    could also be used instead.
     [key] is either a 32 (recommended) or 16 bytes.
     [nonce] is 8 bytes.
     @raise Invalid_argument if [key] or [nonce] is not of the correct size *)
