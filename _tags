@@ -2,6 +2,9 @@ true : annot, bin_annot
 true : warn_error(+1..49)
 true : warn(+A-4-6-7-9-40-42-44-48)
 
-<chacha_core.{ml,mli}>: package(cstruct, nocrypto)
+<**/*.c>: ccopt(--std=c99 -Wall -Wextra -O3)
+
+<chacha_core.{ml,mli}>: package(cstruct)
+<chacha-core.cm{,x}a>: link_stubs(libchacha-core)
 <chacha.{ml,mli}>: package(cstruct, nocrypto)
-<chacha_tests.{ml,native,byte}>: package(cstruct, nocrypto, alcotest)
+<chacha_tests.{ml,native,byte}>: use_chacha-core, package(cstruct, nocrypto, alcotest)

@@ -8,7 +8,9 @@ maintainer:   "Alfredo Beaumont <alfredo.beaumont@gmail.com>"
 license:      "BSD2"
 
 build: [
-  ["ocaml" "pkg/pkg.ml" "build" "--pinned" "%{pinned}%"]
+  [ "ocaml" "pkg/pkg.ml" "build" "--pinned" "%{pinned}%" "--tests" "false"
+    "--xen" "%{mirage-xen:installed}%"
+    "--freestanding" "%{mirage-solo5:installed}%" ]
 ]
 build-test: [
   ["ocaml" "pkg/pkg.ml" "build" "--pinned" "%{pinned}%" "--tests" "true"]
@@ -18,8 +20,11 @@ depends: [
   "ocamlfind" {build}
   "ocamlbuild" {build}
   "topkg" {build}
+  "ocb-stubblr" {build}
   "cstruct" {>= "3.2.0"}
   "nocrypto" {>= "0.5.3"}
   "alcotest" {test}
+  ("mirage-no-xen" | "mirage-xen")
+  ("mirage-no-solo5" | "mirage-solo5")
 ]
 available: [ ocaml-version >= "4.02.0" ]

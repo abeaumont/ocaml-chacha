@@ -19,7 +19,7 @@ let () =
   and fs   = Conf.value c fs in
   Ok [
     Pkg.clib "libchacha-core.clib";
-    Pkg.mllib ~api:["Chacha"] "chacha.mllib";
+    Pkg.mllib "chacha.mllib";
     Pkg.test "chacha_tests";
-    mirage ~xen ~fs "libchacha.clib";
+    mirage ~xen ~fs "libchacha-core.clib";
   ]

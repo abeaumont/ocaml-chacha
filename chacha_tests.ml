@@ -717,3 +717,13 @@ let chacha8_128_bit_tests = [
   "TC7: Sequence patterns in key and IV.", `Quick, chacha8_128_7_test;
   "TC8: key: 'All your base are belong to us!, IV: 'IETF2013'", `Quick, chacha8_128_8_test;
 ]
+
+let () =
+  Alcotest.run "ChaCha Tests" [
+    "ChaCha20 256bit key tests", chacha20_256_bit_tests;
+    "ChaCha20 128bit key tests", chacha20_128_bit_tests;
+    "ChaCha12 256bit key tests", chacha12_256_bit_tests;
+    "ChaCha12 128bit key tests", chacha12_128_bit_tests;
+    "ChaCha8 256bit key tests", chacha8_256_bit_tests;
+    "ChaCha8 128bit key tests", chacha8_128_bit_tests;
+  ]
