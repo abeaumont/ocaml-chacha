@@ -1,0 +1,8 @@
+version = "%%VERSION_NUM%%"
+description = "ChaCha encryption functions in OCaml"
+requires = "cstruct nocrypto"
+archive(byte) = "chacha.cma"
+archive(native) = "chacha.cmxa"
+plugin(byte) = "chacha.cma"
+plugin(native) = "chacha.cmxs"
+exists_if = "chacha.cma"
