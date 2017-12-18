@@ -3,7 +3,6 @@
     Test Vectors for the Stream Cipher ChaCha} *)
 
 let test_chacha ~hash ~key ~nonce ~output0 ~output1 =
-  let open Salsa20_core.Utils in
   let open Cstruct in
   let open Alcotest in
   let key = of_hex key

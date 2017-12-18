@@ -18,9 +18,8 @@ depends: [
   "ocamlfind" {build}
   "ocamlbuild" {build}
   "topkg" {build}
-  "cstruct" {>= "1.7.0"}
+  "cstruct" {>= "3.2.0"}
   "nocrypto" {>= "0.5.3"}
-  "salsa20-core" {>= "0.1.0"}
   "alcotest" {test}
 ]
 available: [ ocaml-version >= "4.02.0" ]

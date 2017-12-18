@@ -4,4 +4,4 @@ true : warn(+A-4-6-7-9-40-42-44-48)
 
 <chacha_core.{ml,mli}>: package(cstruct, nocrypto)
 <chacha.{ml,mli}>: package(cstruct, nocrypto)
-<chacha_tests.{ml,native,byte}>: package(cstruct, nocrypto, alcotest, salsa20-core)
+<chacha_tests.{ml,native,byte}>: package(cstruct, nocrypto, alcotest)
