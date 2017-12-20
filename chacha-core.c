@@ -10,10 +10,10 @@ static inline uint32_t r(uint32_t a, int b) {
 }
 
 static inline void quarterround(uint32_t *x, int a, int b, int c, int d) {
-  x[a] += x[b]; x[d] ^= x[a]; x[d] = r(x[d], 16);
-  x[c] += x[d]; x[b] ^= x[c]; x[b] = r(x[b], 12);
-  x[a] += x[b]; x[d] ^= x[a]; x[d] = r(x[d], 8);
-  x[c] += x[d]; x[b] ^= x[c]; x[b] = r(x[b], 7);
+  x[a] += x[b]; x[d] = r(x[d] ^ x[a], 16);
+  x[c] += x[d]; x[b] = r(x[b] ^ x[c], 12);
+  x[a] += x[b]; x[d] = r(x[d] ^ x[a], 8);
+  x[c] += x[d]; x[b] = r(x[b] ^ x[c], 7);
 }
 
 static inline uint32_t get_u32_le(uint8_t *input, int offset) {
