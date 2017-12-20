@@ -27,4 +27,4 @@ depends: [
   ("mirage-no-xen" | "mirage-xen")
   ("mirage-no-solo5" | "mirage-solo5")
 ]
-available: [ ocaml-version >= "4.02.0" ]
+available: [ ocaml-version >= "4.03.0" ]
