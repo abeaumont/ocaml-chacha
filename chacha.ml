@@ -14,14 +14,11 @@ let expand key nonce =
       | _ -> invalid_arg "key must be either 32 (recommended) or 16 byte long)"
     in
     let state = Cs.create 64 in
-    Cs.blit_from_string s 0 state 0 4 ;
-    Cs.blit k0 0 state 4 16 ;
-    Cs.blit_from_string s 4 state 20 4 ;
-    Cs.blit nonce 0 state 24 8 ;
-    Cs.LE.set_uint64 state 32 Int64.zero ;
-    Cs.blit_from_string s 8 state 40 4 ;
-    Cs.blit k1 0 state 44 16 ;
-    Cs.blit_from_string s 12 state 60 4 ;
+    Cs.blit_from_string s 0 state 0 16 ;
+    Cs.blit k0 0 state 16 16 ;
+    Cs.blit k1 0 state 32 16 ;
+    Cs.LE.set_uint64 state 48 Int64.zero ;
+    Cs.blit nonce 0 state 56 8 ;
     state
 
 let create ?(hash= Chacha_core.chacha20) key nonce =
@@ -31,11 +28,11 @@ let create ?(hash= Chacha_core.chacha20) key nonce =
 
 let hash state =
   state.buffer <- state.hash state.state ;
-  let nonce = Int32.add (Cs.LE.get_uint32 state.state 32) Int32.one in
-  Cs.LE.set_uint32 state.state 32 nonce ;
+  let nonce = Int32.add (Cs.LE.get_uint32 state.state 48) Int32.one in
+  Cs.LE.set_uint32 state.state 48 nonce ;
   if nonce = Int32.zero then
-    let nonce = Int32.add (Cs.LE.get_uint32 state.state 36) Int32.one in
-    Cs.LE.set_uint32 state.state 36 nonce
+    let nonce = Int32.add (Cs.LE.get_uint32 state.state 52) Int32.one in
+    Cs.LE.set_uint32 state.state 52 nonce
 
 let encrypt input state =
   let l = Cs.len input in
