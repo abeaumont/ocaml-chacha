@@ -1,0 +1,10 @@
+(library
+ (name chacha_core)
+ (public_name chacha-core)
+ (c_names chacha-core)
+ (c_flags (:include cflags.sexp)))
+  
+(library
+ (name chacha)
+ (public_name chacha)
+ (libraries chacha-core cstruct mirage-crypto))

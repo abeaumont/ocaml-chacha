@@ -43,7 +43,7 @@ let encrypt input state =
     let count = min (Cs.len state.buffer) (l - !i) in
     let buffer = Cs.create count in
     Cs.blit input !i buffer 0 count ;
-    Nocrypto.Uncommon.Cs.xor_into state.buffer buffer count ;
+    Mirage_crypto.Uncommon.Cs.xor_into state.buffer buffer count ;
     Cs.blit buffer 0 output !i count ;
     i := !i + count ;
     state.buffer <- Cs.shift state.buffer count
