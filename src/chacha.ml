@@ -1,6 +1,10 @@
 module Cs = Cstruct
 
-type t = {mutable state: Cs.t; mutable buffer: Cs.t; hash: Cs.t -> Cs.t}
+type t = {
+  mutable state: Cs.t;
+  mutable buffer: Cs.t;
+  hash: Cs.t -> Cs.t
+}
 
 let expand key nonce =
   if Cs.len nonce <> 8 then invalid_arg "nonce must be 8 byte long"
@@ -21,7 +25,7 @@ let expand key nonce =
     Cs.blit nonce 0 state 56 8 ;
     state
 
-let create ?(hash= Chacha_core.chacha20) key nonce =
+let create ?(hash=Chacha_core.chacha20) key nonce =
   let state = expand key nonce in
   let buffer = Cs.create 0 in
   {state; buffer; hash}
