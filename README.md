@@ -17,17 +17,17 @@ opam install chacha
 
 ```ocaml
 utop[0]> #require "mirage-crypto";;
-utop[4]> #require "mirage-crypto-rng.unix";;
-utop[6]> Mirage_crypto_rng_unix.initialize ();;
+utop[1]> #require "mirage-crypto-rng.unix";;
+utop[2]> Mirage_crypto_rng_unix.initialize ();;
 - : unit = ()
-utop[7]> let key = Mirage_crypto_rng.generate 32;;
+utop[3]> let key = Mirage_crypto_rng.generate 32;;
 val key : Cstruct.t = {Cstruct.buffer = <abstr>; off = 0; len = 32}
-utop[8]> let nonce = Cstruct.create 8;;
+utop[4]> let nonce = Cstruct.create 8;;
 val nonce : Cstruct.t = {Cstruct.buffer = <abstr>; off = 0; len = 8}
-utop[9]> #require "chacha";;
-utop[10]> let state = Chacha.create key nonce;;
+utop[5]> #require "chacha";;
+utop[6]> let state = Chacha.create key nonce;;
 val state : Chacha.t = <abstr>
-utop[11]> Chacha.encrypt (Cstruct.of_string "My secret text") state |> Cstruct.to_string;;
+utop[7]> Chacha.encrypt (Cstruct.of_string "My secret text") state |> Cstruct.to_string;;
 - : string = "\026m.\\363\\026\\263\\207Xg\\256l\\262\\232F"
 ```
 
