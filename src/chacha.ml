@@ -1,6 +1,10 @@
 module Cs = Cstruct
 
-type t = {mutable state: Cs.t; mutable buffer: Cs.t; hash: Cs.t -> Cs.t}
+type t = {
+  mutable state: Cs.t;
+  mutable buffer: Cs.t;
+  hash: Cs.t -> Cs.t
+}
 
 let expand key nonce =
   if Cs.len nonce <> 8 then invalid_arg "nonce must be 8 byte long"
@@ -21,7 +25,7 @@ let expand key nonce =
     Cs.blit nonce 0 state 56 8 ;
     state
 
-let create ?(hash= Chacha_core.chacha20) key nonce =
+let create ?(hash=Chacha_core.chacha20) key nonce =
   let state = expand key nonce in
   let buffer = Cs.create 0 in
   {state; buffer; hash}
@@ -43,7 +47,7 @@ let encrypt input state =
     let count = min (Cs.len state.buffer) (l - !i) in
     let buffer = Cs.create count in
     Cs.blit input !i buffer 0 count ;
-    Nocrypto.Uncommon.Cs.xor_into state.buffer buffer count ;
+    Mirage_crypto.Uncommon.Cs.xor_into state.buffer buffer count ;
     Cs.blit buffer 0 output !i count ;
     i := !i + count ;
     state.buffer <- Cs.shift state.buffer count
