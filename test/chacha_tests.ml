@@ -15,7 +15,7 @@ let test_chacha ~hash ~key ~nonce ~output0 ~output1 =
       Chacha.create ~hash key nonce
       |> Chacha.encrypt input
       |> to_string in
-    check int "Chacha test output length" (Cstruct.len input) (String.length stream);
+    check int "Chacha test output length" (Cstruct.length input) (String.length stream);
     check string "Chacha test block 0 value" (String.sub stream 0 64) output0;
     check string "Chacha test block 1 value" (String.sub stream 64 64) output1
   

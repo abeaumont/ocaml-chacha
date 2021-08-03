@@ -1,4 +1,4 @@
 (test
  (name chacha_tests)
  (modules chacha_tests)
- (libraries chacha alcotest))
+ (libraries cstruct chacha alcotest))
