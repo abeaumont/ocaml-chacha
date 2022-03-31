@@ -6,7 +6,7 @@ end
 
 let chacha count i =
   let l = 64 in
-  if Cs.len i <> l then
+  if Cs.length i <> l then
     invalid_arg "input must be 16 blocks of 32 bits"
   else
     let o = Cs.create l in
